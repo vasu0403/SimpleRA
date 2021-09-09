@@ -1,0 +1,29 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/vasu0403/college/sem7/DataSystems/project-9/src'
+g++ -g -I .   -c -o server.o server.cpp
+g++ -g -I .   -c -o page.o page.cpp
+g++ -g -I .   -c -o bufferManager.o bufferManager.cpp
+g++ -g -I .   -c -o executor.o executor.cpp
+g++ -g -I .   -c -o tableCatalogue.o tableCatalogue.cpp
+g++ -g -I .   -c -o cursor.o cursor.cpp
+g++ -g -I .   -c -o clear.o clear.cpp
+g++ -g -I .   -c -o logger.o logger.cpp
+g++ -g -I .   -c -o semanticParser.o semanticParser.cpp
+g++ -g -I .   -c -o table.o table.cpp
+g++ -g -I .   -c -o syntacticParser.o syntacticParser.cpp
+g++ -g -I .   -c -o executors/projection.o executors/projection.cpp
+g++ -g -I .   -c -o executors/selection.o executors/selection.cpp
+g++ -g -I .   -c -o executors/source.o executors/source.cpp
+g++ -g -I .   -c -o executors/print.o executors/print.cpp
+g++ -g -I .   -c -o executors/cross.o executors/cross.cpp
+g++ -g -I .   -c -o executors/index.o executors/index.cpp
+g++ -g -I .   -c -o executors/join.o executors/join.cpp
+g++ -g -I .   -c -o executors/list.o executors/list.cpp
+g++ -g -I .   -c -o executors/load.o executors/load.cpp
+g++ -g -I .   -c -o executors/sort.o executors/sort.cpp
+g++ -g -I .   -c -o executors/rename.o executors/rename.cpp
+g++ -g -I .   -c -o executors/export.o executors/export.cpp
+g++ -g -I .   -c -o executors/distinct.o executors/distinct.cpp
+g++ -g -I . -o server server.o page.o bufferManager.o executor.o tableCatalogue.o cursor.o clear.o logger.o semanticParser.o table.o syntacticParser.o ./executors/projection.o ./executors/selection.o ./executors/source.o ./executors/print.o ./executors/cross.o ./executors/index.o ./executors/join.o ./executors/list.o ./executors/load.o ./executors/sort.o ./executors/rename.o ./executors/export.o ./executors/distinct.o
+make: Leaving directory '/home/vasu0403/college/sem7/DataSystems/project-9/src'
+ 

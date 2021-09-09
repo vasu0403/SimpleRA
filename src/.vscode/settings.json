@@ -1,6 +1,9 @@
 {
-    "files.associations": {
-        "iostream": "cpp",
-        "iosfwd": "cpp"
-    }
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/vasu0403/college/sem7/DataSystems/project-9/src",
+            "binaryPath": "/home/vasu0403/college/sem7/DataSystems/project-9/src/server",
+            "binaryArgs": []
+        }
+    ]
 }
