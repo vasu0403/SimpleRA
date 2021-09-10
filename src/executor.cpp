@@ -11,6 +11,7 @@ void executeCommand(){
         case JOIN: executeJOIN(); break;
         case LIST: executeLIST(); break;
         case LOAD: executeLOAD(); break;
+        case LOAD_MATRIX: executeLoadMATRIX(); break;
         case PRINT: executePRINT(); break;
         case PROJECTION: executePROJECTION(); break;
         case RENAME: executeRENAME(); break;

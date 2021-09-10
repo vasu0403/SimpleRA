@@ -12,6 +12,7 @@ enum QueryType
     JOIN,
     LIST,
     LOAD,
+    LOAD_MATRIX,
     PRINT,
     PROJECTION,
     RENAME,
@@ -76,6 +77,8 @@ public:
 
     string loadRelationName = "";
 
+    string loadMatrixName = "";
+
     string printRelationName = "";
 
     string projectionResultRelationName = "";
@@ -114,6 +117,7 @@ bool syntacticParseINDEX();
 bool syntacticParseJOIN();
 bool syntacticParseLIST();
 bool syntacticParseLOAD();
+bool syntacticParseLoadMATRIX();
 bool syntacticParsePRINT();
 bool syntacticParsePROJECTION();
 bool syntacticParseRENAME();

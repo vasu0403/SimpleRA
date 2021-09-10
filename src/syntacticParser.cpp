@@ -17,8 +17,12 @@ bool syntacticParse()
         return syntacticParseINDEX();
     else if (possibleQueryType == "LIST")
         return syntacticParseLIST();
-    else if (possibleQueryType == "LOAD")
+    else if (possibleQueryType == "LOAD") {
+        if (tokenizedQuery[1] == "MATRIX") {
+            return syntacticParseLoadMATRIX();
+        }
         return syntacticParseLOAD();
+    }
     else if (possibleQueryType == "PRINT")
         return syntacticParsePRINT();
     else if (possibleQueryType == "RENAME")

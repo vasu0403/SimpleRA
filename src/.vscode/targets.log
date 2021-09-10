@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Thu Sep  9 18:16:52 2021
+# Make data base, printed on Fri Sep 10 23:24:35 2021
 
 # Variables
 
@@ -61,7 +61,7 @@ EXEC_SRC := ./executors/projection.cpp ./executors/selection.cpp ./executors/sou
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-f913d40d-f91c-427b-a7bb-0091b845be7c.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-0b00a770-559c-4bf6-9dc7-c8c1257a9805.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -77,7 +77,7 @@ PWD = /home/vasu0403/college/sem7/DataSystems/project-9/src
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/10_interop
+WSL_INTEROP = /run/WSL/991_interop
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/server/remoteExtensionHostProcess
 # environment
@@ -161,7 +161,6 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
- 
 VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu-20.04
@@ -254,7 +253,7 @@ server.o:
 
 server: server.o page.o bufferManager.o executor.o tableCatalogue.o cursor.o clear.o logger.o semanticParser.o table.o syntacticParser.o executors/projection.o executors/selection.o executors/source.o executors/print.o executors/cross.o executors/index.o executors/join.o executors/list.o executors/load.o executors/sort.o executors/rename.o executors/export.o executors/distinct.o
 #  Implicit rule search has not been done.
-#  Last modified 2021-09-09 18:09:59.8688311
+#  Last modified 2021-09-09 23:59:18.2363331
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 20):
@@ -270,6 +269,7 @@ executors/print.o:
 # Not a target:
 executors/source.o:
 #  Implicit rule search has been done.
+ 
 #  Last modified 2021-09-09 18:09:48.6688311
 #  File has been updated.
 #  Successfully updated.
@@ -409,6 +409,6 @@ cursor.o:
 # strcache performance: lookups = 115 / hit rate = 21%
 # hash-table stats:
 # Load=90/8192=1%, Rehash=0, Collisions=2/115=2%
-# Finished Make data base on Thu Sep  9 18:16:52 2021
+# Finished Make data base on Fri Sep 10 23:24:35 2021
 
  
