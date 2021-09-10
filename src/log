@@ -2,6 +2,46 @@ BufferManager::BufferManager
 ParseQuery::clear
 
 Reading New Command: 
+LOAD MATRIX
+doCommand
+syntacticParse
+syntacticParseLoadMatrix
+ParseQuery::clear
+
+Reading New Command: 
+LOAD MATRIX C
+doCommand
+syntacticParse
+syntacticParseLoadMatrix
+semanticParse
+symanticParseLoadMatrix
+MatrixCatalogue::isMatrix
+ParseQuery::clear
+
+Reading New Command: 
+LOAD MATRIX A
+doCommand
+syntacticParse
+syntacticParseLoadMatrix
+semanticParse
+symanticParseLoadMatrix
+MatrixCatalogue::isMatrix
+executeLoadMATRIX
+Matrix::Matrix
+MatrixCatalogue::insertMatrix
+ParseQuery::clear
+
+Reading New Command: 
+LOAD MATRIX A
+doCommand
+syntacticParse
+syntacticParseLoadMatrix
+semanticParse
+symanticParseLoadMatrix
+MatrixCatalogue::isMatrix
+ParseQuery::clear
+
+Reading New Command: 
 LOAD A
 doCommand
 syntacticParse
@@ -21,31 +61,64 @@ TableCatalogue::~insertTable
 ParseQuery::clear
 
 Reading New Command: 
-CLEAR A
+PRINT A
 doCommand
 syntacticParse
-syntacticParseCLEAR
+syntacticParsePRINT
 semanticParse
-semanticParseCLEAR
+semanticParsePRINT
 TableCatalogue::isTable
-executeCLEAR
-TableCatalogue::deleteTable
-Table::~unload
-BufferManager::deleteFile
-BufferManager::deleteFile: Success
-Table::isPermanent
+executePRINT
+TableCatalogue::getTable
+Table::print
+Table::printRow
+Cursor::Cursor
+BufferManager::getPage
+BufferManager::inPool
+BufferManager::insertIntoPool
+Page::Page
+TableCatalogue::getTable
+Cursor::geNext
+Page::getRow
+Table::printRow
+Cursor::geNext
+Page::getRow
+Table::printRow
+Cursor::geNext
+Page::getRow
+Table::printRow
+Cursor::geNext
+Page::getRow
+Table::printRow
+Cursor::geNext
+Page::getRow
+Table::printRow
+Cursor::geNext
+Page::getRow
+Table::printRow
+Cursor::geNext
+Page::getRow
+Table::printRow
+Cursor::geNext
+Page::getRow
+Table::printRow
+Cursor::geNext
+Page::getRow
+Table::printRow
+Cursor::geNext
+Page::getRow
+Table::printRow
 ParseQuery::clear
 
 Reading New Command: 
-LOAD MATRIX A
-doCommand
-syntacticParse
-syntacticParseLoadMatrix
-semanticParse
-symanticParseLoadMatrix
-executeLoadMATRIX
+UIT
 ParseQuery::clear
 
 Reading New Command: 
 QUIT
+MatrixCatalague::~MatrixCatalague
 TableCatalogue::~TableCatalogue
+Table::~unload
+BufferManager::deleteFile
+BufferManager::deleteFile: Success
+Table::isPermanent
