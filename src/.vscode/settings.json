@@ -5,5 +5,8 @@
             "binaryPath": "/home/vasu0403/college/sem7/DataSystems/project-9/src/server",
             "binaryArgs": []
         }
-    ]
+    ],
+    "files.associations": {
+        "iostream": "cpp"
+    }
 }

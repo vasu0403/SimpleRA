@@ -1,12 +1,13 @@
 #include "cursor.h"
 
 class Matrix {
-
+    bool findMatrixProperties();
 public:
     string sourceFileName = "";
     string matrixName = "";
-    uint columnCount = 0;
-    long long int rowCount = 0;
+    uint size = 0;
+    uint numZeros = 0;
+    bool isSparse = false;
 
     Matrix();
     Matrix(string matrixName);

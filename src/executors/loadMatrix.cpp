@@ -32,7 +32,7 @@ void executeLoadMATRIX() {
     Matrix *matrix = new Matrix(parsedQuery.loadMatrixName);
     if(matrix->load()) {
         matrixCatalogue.insertMatrix(matrix);
-        cout << "Loaded Matrix" << endl;
+        cout << "Loaded Matrix of size: " << matrix->size << ". Sparse: "<< matrix->isSparse << endl; 
     }
     return;
 }

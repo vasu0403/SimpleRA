@@ -2,24 +2,7 @@ BufferManager::BufferManager
 ParseQuery::clear
 
 Reading New Command: 
-LOAD MATRIX
-doCommand
-syntacticParse
-syntacticParseLoadMatrix
-ParseQuery::clear
-
-Reading New Command: 
-LOAD MATRIX C
-doCommand
-syntacticParse
-syntacticParseLoadMatrix
-semanticParse
-symanticParseLoadMatrix
-MatrixCatalogue::isMatrix
-ParseQuery::clear
-
-Reading New Command: 
-LOAD MATRIX A
+LOAD MATRIX M
 doCommand
 syntacticParse
 syntacticParseLoadMatrix
@@ -28,97 +11,12 @@ symanticParseLoadMatrix
 MatrixCatalogue::isMatrix
 executeLoadMATRIX
 Matrix::Matrix
+Matrix::load
+Matrix::findMatrixProperties
 MatrixCatalogue::insertMatrix
-ParseQuery::clear
-
-Reading New Command: 
-LOAD MATRIX A
-doCommand
-syntacticParse
-syntacticParseLoadMatrix
-semanticParse
-symanticParseLoadMatrix
-MatrixCatalogue::isMatrix
-ParseQuery::clear
-
-Reading New Command: 
-LOAD A
-doCommand
-syntacticParse
-syntacticParseLOAD
-semanticParse
-semanticParseLOAD
-TableCatalogue::isTable
-executeLOAD
-Table::Table
-Table::load
-Table::extractColumnNames
-Table::blockify
-BufferManager::writePage
-Page::Page
-Page::writePage
-TableCatalogue::~insertTable
-ParseQuery::clear
-
-Reading New Command: 
-PRINT A
-doCommand
-syntacticParse
-syntacticParsePRINT
-semanticParse
-semanticParsePRINT
-TableCatalogue::isTable
-executePRINT
-TableCatalogue::getTable
-Table::print
-Table::printRow
-Cursor::Cursor
-BufferManager::getPage
-BufferManager::inPool
-BufferManager::insertIntoPool
-Page::Page
-TableCatalogue::getTable
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-Cursor::geNext
-Page::getRow
-Table::printRow
-ParseQuery::clear
-
-Reading New Command: 
-UIT
 ParseQuery::clear
 
 Reading New Command: 
 QUIT
 MatrixCatalague::~MatrixCatalague
 TableCatalogue::~TableCatalogue
-Table::~unload
-BufferManager::deleteFile
-BufferManager::deleteFile: Success
-Table::isPermanent
