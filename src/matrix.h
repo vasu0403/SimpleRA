@@ -40,9 +40,9 @@ void writeRow(vector<T> row, ostream &fout)
     logger.log("Matrix::printRow");
     for (int columnCounter = 0; columnCounter < row.size(); columnCounter++)
     {
-        // if(row[columnCounter] == -1) {
-        //     break;
-        // }
+        if(row[columnCounter] == -1) {
+            break;
+        }
         if (columnCounter != 0)
             fout << ", ";
         fout << row[columnCounter];
