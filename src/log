@@ -2,7 +2,7 @@ BufferManager::BufferManager
 ParseQuery::clear
 
 Reading New Command: 
-LOAD MATRIX M
+LOAD MATRIX test
 doCommand
 syntacticParse
 syntacticParseLoadMatrix
@@ -13,10 +13,35 @@ executeLoadMATRIX
 Matrix::Matrix
 Matrix::load
 Matrix::findMatrixProperties
+Matrix::blockify
+BufferManager::writePage
+Page::Page
+Page::writePage
+BufferManager::writePage
+Page::Page
+Page::writePage
+BufferManager::writePage
+Page::Page
+Page::writePage
+BufferManager::writePage
+Page::Page
+Page::writePage
+BufferManager::writePage
+Page::Page
+Page::writePage
+BufferManager::writePage
+Page::Page
+Page::writePage
+BufferManager::writePage
+Page::Page
+Page::writePage
+BufferManager::writePage
+Page::Page
+Page::writePage
+BufferManager::writePage
+Page::Page
+Page::writePage
 MatrixCatalogue::insertMatrix
 ParseQuery::clear
 
 Reading New Command: 
-QUIT
-MatrixCatalague::~MatrixCatalague
-TableCatalogue::~TableCatalogue

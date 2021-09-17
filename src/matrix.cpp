@@ -32,9 +32,70 @@ Matrix::Matrix(string matrixName) {
 bool Matrix::load() {
     logger.log("Matrix::load");
     if (this->findMatrixProperties()) {
-        return true;
+        return this->blockify();
     }
     return false;
+}
+
+
+/**
+ * @brief This function splits the original matrix into smaller square matrices and stores them in multiple pages 
+ *
+ * @return true if the matrix has been successfully blockified 
+ * @return false if an error occurred 
+ */
+bool Matrix::blockify() {
+    logger.log("Matrix::blockify");
+    if(this->isSparse) {
+        return this->compressedBlockify();
+    } else {
+        return this->normalBlockify();
+    }
+}
+
+/**
+ * @brief This function blockifies the matrix when the input matrix is not sparse 
+ *
+ * @return true if the matrix has been successfully blockified 
+ * @return false if an error occurred 
+ */
+bool Matrix::compressedBlockify() {
+    logger.log("Matrix::compressedBlockify");
+    return true;
+}
+
+bool Matrix::normalBlockify() {
+    ifstream fin(this->sourceFileName, ios::in);
+    this->blockingFactor = ceil((float)this->size / this->sizePerBlock);
+    vector<int> row(this->sizePerBlock, -1);
+    vector<vector<int>> defaultBlock(this->sizePerBlock, row);
+    vector<vector<int>> blocks[this->blockingFactor];
+    string line, word;
+    for(int block = 0; block < this->blockingFactor; block++) {
+        blocks[block] = defaultBlock;
+    }
+    for(int blockRowIndex = 0; blockRowIndex < this->blockingFactor; blockRowIndex++) {
+        for(int i = 0; i < this->sizePerBlock; i++) {
+            if(!getline(fin, line)) {
+                line = "";
+            }
+            stringstream s(line);
+            for(int blockColIndex = 0; blockColIndex < this->blockingFactor; blockColIndex++) {
+                for(int j = 0; j < this->sizePerBlock; j++) {
+                    if(getline(s, word, ',')) {
+                        blocks[blockColIndex][i][j] = stoi(word);            
+                    } else {
+                        blocks[blockColIndex][i][j] = -1;
+                    }
+                }
+            }
+        }
+        for(int blockColIndex = 0; blockColIndex < this->blockingFactor; blockColIndex++) {
+            uint blockCount = (blockRowIndex * this->blockingFactor) + blockColIndex;
+            bufferManager.writePage(this->matrixName, blockCount, blocks[blockColIndex], this->sizePerBlock);
+        }
+    }
+    return true;
 }
 
 bool Matrix::findMatrixProperties() {
@@ -50,30 +111,35 @@ bool Matrix::findMatrixProperties() {
             try {
                 if(stoi(word) == 0) numZeros++;
             } catch(...) {
-                cout << "ERROR: Matrix elements need to be of the type integer" << endl;
+                fin.close();
+                cout << "SEMANTIC ERROR: Matrix elements need to be of the type integer" << endl;
                 return false;
             }
         }
         for(int row = 1; row < size; row++) {
             if(!getline(fin, line)) {
-                cout << "ERROR: No of rows are less than number of columns!" << endl;
+                fin.close();
+                cout << "SEMANTIC ERROR: No of rows are less than number of columns!" << endl;
                 return false;
             }
             stringstream s(line);
             for(int col = 0; col < size; col++) {
                 if(!getline(s, word, ',')) {
-                    cout << "ERROR: Data does not follow the structure of a matrix" << endl;
+                    fin.close();
+                    cout << "SEMANTIC ERROR: Data does not follow the structure of a matrix" << endl;
                 }
                 try {
                     if(stoi(word) == 0) numZeros++;
                 } catch(...) {
-                    cout << "ERROR: Matrix elements need to be of the type integer" << endl;
+                    fin.close();
+                    cout << "SEMANTIC ERROR: Matrix elements need to be of the type integer" << endl;
                     return false;
                 }
             }
         }
         if(getline(fin, line)) {
-            cout << "ERROR: No of rows are greater than number of columns!" << endl;
+            fin.close();
+            cout << "SEMANTIC ERROR: No of rows are greater than number of columns!" << endl;
             return false;
         }
         this->size = size;
@@ -81,9 +147,11 @@ bool Matrix::findMatrixProperties() {
         if((numZeros * 100) / (size * size) >= 60) {
             this->isSparse = true;
         }
+        fin.close();
         return true;
     } else {
-        cout << "ERROR: File is empty" << endl;
+        fin.close();
+        cout << "SEMANTIC ERROR: File is empty" << endl;
         return false;
     }
 }
