@@ -37,7 +37,56 @@ bool Matrix::load() {
     return false;
 }
 
+void Matrix::transpose() {
+    logger.log("Matrix::transpose");
+    if(this->isSparse) {
+        return;
+    } else {
+        return this->normalTranspose();
+    }
+}
 
+void Matrix::inPlaceTranspose(vector<vector<int>>& matrix) {
+    for(int row = 0; row < this->sizePerBlock; row++) {
+        for(int col = 0; col < row; col++) {
+            swap(matrix[row][col], matrix[col][row]);
+        }
+    }
+}
+
+void Matrix::normalTranspose() {
+    for(int blockRow = 0; blockRow < this->blockingFactor; blockRow++) {
+        for(int blockCol = 0; blockCol <= blockRow; blockCol++) {
+            if(blockCol == blockCol) {
+                int pageIndex = blockRow * this->blockingFactor + blockCol;
+                MatrixCursor matrixCursor(this->matrixName, pageIndex);
+                vector<vector<int>> submatrix(this->sizePerBlock);
+                for(int rowInd = 0; rowInd < this->sizePerBlock; rowInd++) {
+                    vector<int> row = matrixCursor.getNext();
+                    submatrix[rowInd] = row;
+                }
+                this->inPlaceTranspose(submatrix);
+                matrixBufferManager.writePage(this->matrixName, pageIndex, submatrix, this->sizePerBlock);
+            } else {
+                int pageIndex1 = blockRow * this->blockingFactor + blockCol;
+                int pageIndex2 = blockCol * this->blockingFactor + blockRow;
+                MatrixCursor matrixCursor1(this->matrixName, pageIndex1);
+                MatrixCursor matrixCursor2(this->matrixName, pageIndex2);
+                vector<vector<int>> submatrix1(this->sizePerBlock), submatrix2(this->sizePerBlock);
+                vector<int> row;
+                for(int rowInd = 0; rowInd < this->sizePerBlock; rowInd++) {
+                    row = matrixCursor1.getNext();
+                    submatrix1[rowInd] = row;
+                    row = matrixCursor2.getNext();
+                    submatrix2[rowInd] = row;
+                }
+                this->inPlaceTranspose(submatrix1), this->inPlaceTranspose(submatrix2);
+                matrixBufferManager.writePage(this->matrixName, pageIndex1, submatrix2, this->sizePerBlock);
+                matrixBufferManager.writePage(this->matrixName, pageIndex2, submatrix1, this->sizePerBlock);
+            }
+        }
+    }
+}
 /**
  * @brief This function splits the original matrix into smaller square matrices and stores them in multiple pages 
  *

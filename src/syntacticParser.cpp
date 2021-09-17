@@ -35,6 +35,11 @@ bool syntacticParse()
         return syntacticParseEXPORT();
     else if(possibleQueryType == "SOURCE")
         return syntacticParseSOURCE();
+    else if(possibleQueryType == "TRANSPOSE") {
+        if (tokenizedQuery[1] == "MATRIX") {
+            return syntacticParseTransposeMATRIX();
+        }
+    }
     else
     {
         string resultantRelationName = possibleQueryType;

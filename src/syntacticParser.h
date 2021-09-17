@@ -21,6 +21,7 @@ enum QueryType
     SELECTION,
     SORT,
     SOURCE,
+    TRANSPOSE_MATRIX,
     UNDETERMINED
 };
 
@@ -100,6 +101,8 @@ public:
     string selectionSecondColumnName = "";
     int selectionIntLiteral = 0;
 
+    string transposeMatrixName = "";
+
     SortingStrategy sortingStrategy = NO_SORT_CLAUSE;
     string sortResultRelationName = "";
     string sortColumnName = "";
@@ -128,6 +131,7 @@ bool syntacticParseRENAME();
 bool syntacticParseSELECTION();
 bool syntacticParseSORT();
 bool syntacticParseSOURCE();
+bool syntacticParseTransposeMATRIX();
 
 bool isFileExists(string tableName);
 bool isQueryFile(string fileName);

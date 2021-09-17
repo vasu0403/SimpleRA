@@ -22,6 +22,9 @@ public:
     void print();
     void unload();
     void getNextPage(MatrixCursor *matrixCursor);
+    void transpose();
+    void normalTranspose();
+    void inPlaceTranspose(vector<vector<int>>& matrix);
 
 
 /**
