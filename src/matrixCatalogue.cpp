@@ -33,6 +33,13 @@ void MatrixCatalogue::print() {
     }
 }
 
+Matrix* MatrixCatalogue::getMatrix(string matrixName)
+{
+    logger.log("MatrixCatalogue::getMatrix"); 
+    Matrix *matrix = this->matrices[matrixName];
+    return matrix;
+}
+
 MatrixCatalogue::~MatrixCatalogue(){
     logger.log("MatrixCatalague::~MatrixCatalague"); 
     for(pair<string, Matrix*> matrix: this->matrices){

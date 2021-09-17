@@ -12,7 +12,7 @@ ParsedQuery parsedQuery;
 TableCatalogue tableCatalogue;
 MatrixCatalogue matrixCatalogue;
 BufferManager bufferManager;
-
+MatrixBufferManager matrixBufferManager;
 void doCommand()
 {
     logger.log("doCommand");

@@ -23,8 +23,12 @@ bool syntacticParse()
         }
         return syntacticParseLOAD();
     }
-    else if (possibleQueryType == "PRINT")
+    else if (possibleQueryType == "PRINT") {
+        if (tokenizedQuery[1] == "MATRIX") {
+            return syntacticParsePrintMATRIX();
+        }
         return syntacticParsePRINT();
+    }
     else if (possibleQueryType == "RENAME")
         return syntacticParseRENAME();
     else if(possibleQueryType == "EXPORT")

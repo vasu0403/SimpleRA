@@ -12,6 +12,7 @@ void executeLIST();
 void executeLOAD();
 void executeLoadMATRIX();
 void executePRINT();
+void executePrintMATRIX();
 void executePROJECTION();
 void executeRENAME();
 void executeSELECTION();

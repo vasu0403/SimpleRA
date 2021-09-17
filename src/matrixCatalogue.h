@@ -15,5 +15,6 @@ public:
     void deleteMatrix(string matrixName);
     bool isMatrix(string matrixName);
     void print();
+    Matrix* getMatrix(string matrixName);
     ~MatrixCatalogue();
 };

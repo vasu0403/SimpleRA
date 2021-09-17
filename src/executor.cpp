@@ -13,6 +13,7 @@ void executeCommand(){
         case LOAD: executeLOAD(); break;
         case LOAD_MATRIX: executeLoadMATRIX(); break;
         case PRINT: executePRINT(); break;
+        case PRINT_MATRIX: executePrintMATRIX(); break;
         case PROJECTION: executePROJECTION(); break;
         case RENAME: executeRENAME(); break;
         case SELECTION: executeSELECTION(); break;

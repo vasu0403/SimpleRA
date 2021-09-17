@@ -92,7 +92,7 @@ bool Matrix::normalBlockify() {
         }
         for(int blockColIndex = 0; blockColIndex < this->blockingFactor; blockColIndex++) {
             uint blockCount = (blockRowIndex * this->blockingFactor) + blockColIndex;
-            bufferManager.writePage(this->matrixName, blockCount, blocks[blockColIndex], this->sizePerBlock);
+            matrixBufferManager.writePage(this->matrixName, blockCount, blocks[blockColIndex], this->sizePerBlock);
         }
     }
     return true;
@@ -156,6 +156,44 @@ bool Matrix::findMatrixProperties() {
     }
 }
 
+void Matrix::normalPrint() {
+    logger.log("Matrix::normalPrint");
+    uint count = min((uint)20, this->size);
+
+    MatrixCursor matrixCursor(this->matrixName, 0);
+    vector<int> row;
+    for(int rowCounter = 0; rowCounter < count; rowCounter++) {
+        row = matrixCursor.getNext();
+        this->writeRow(row, cout);
+    }
+    printRowCount(this->size);
+}
+
+void Matrix::print() {
+    logger.log("Matrix::print");
+    if(this->isSparse) {
+        ;
+    } else {
+        this->normalPrint();
+    }
+}
+
 void Matrix::unload() {
     return;
 }
+
+/**
+ * @brief This function returns one row of the matrix using the cursor object. It
+ * returns an empty row if all rows have been read.
+ *
+ * @param matrixCursor 
+ * @return vector<int> 
+ */
+void Matrix::getNextPage(MatrixCursor *matrixCursor) {
+    logger.log("Matrix::getNext");
+    if (matrixCursor->pageIndex < (this->blockingFactor * this->blockingFactor) - 1) {
+        matrixCursor->nextPage(matrixCursor->pageIndex+1);
+    }
+}
+
+

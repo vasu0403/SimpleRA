@@ -1,4 +1,4 @@
-#include "cursor.h"
+#include "matrixCursor.h"
 
 class Matrix {
     bool findMatrixProperties();
@@ -14,9 +14,49 @@ public:
 
     Matrix();
     Matrix(string matrixName);
-    bool load();
-    void unload();
     bool blockify();
-    bool normalBlockify();
     bool compressedBlockify();
+    bool load();
+    bool normalBlockify();
+    void normalPrint();
+    void print();
+    void unload();
+    void getNextPage(MatrixCursor *matrixCursor);
+
+
+/**
+ * @brief Static function that takes a vector of valued and prints them out in a
+ * comma seperated format.
+ *
+ * @tparam T current usaages include int and string
+ * @param row 
+ */
+template <typename T>
+void writeRow(vector<T> row, ostream &fout)
+{
+    logger.log("Matrix::printRow");
+    for (int columnCounter = 0; columnCounter < row.size(); columnCounter++)
+    {
+        if (columnCounter != 0)
+            fout << ", ";
+        fout << row[columnCounter];
+    }
+    fout << endl;
+}
+
+/**
+ * @brief Static function that takes a vector of valued and prints them out in a
+ * comma seperated format.
+ *
+ * @tparam T current usaages include int and string
+ * @param row 
+ */
+template <typename T>
+void writeRow(vector<T> row)
+{
+    logger.log("Matrix::printRow");
+    ofstream fout(this->sourceFileName, ios::app);
+    this->writeRow(row, fout);
+    fout.close();
+}
 };

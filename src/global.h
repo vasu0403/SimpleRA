@@ -8,3 +8,4 @@ extern ParsedQuery parsedQuery;
 extern TableCatalogue tableCatalogue;
 extern MatrixCatalogue matrixCatalogue;
 extern BufferManager bufferManager;
+extern MatrixBufferManager matrixBufferManager;
