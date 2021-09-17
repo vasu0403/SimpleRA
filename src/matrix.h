@@ -25,6 +25,7 @@ public:
     void transpose();
     void normalTranspose();
     void inPlaceTranspose(vector<vector<int>>& matrix);
+    void makePermanent();
 
 
 /**
@@ -64,5 +65,22 @@ void writeRow(vector<T> row)
     ofstream fout(this->sourceFileName, ios::app);
     this->writeRow(row, fout);
     fout.close();
+}
+
+template <typename T>
+void exportRow(vector<T> row, bool first, bool end, ostream &fout) {
+    logger.log("Matrix::exportRow");
+    if(row[0] == -1) return;
+    for (int columnCounter = 0; columnCounter < row.size(); columnCounter++) {
+        if(row[columnCounter] == -1) {
+            break;
+        }
+        if (!first || columnCounter != 0)
+            fout << ", ";
+        fout << row[columnCounter];
+    }
+    if(end) { 
+        fout << endl;
+    }
 }
 };

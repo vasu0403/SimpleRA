@@ -18,7 +18,7 @@ MatrixCursor::MatrixCursor(string matrixName, int pageIndex)
  */
 vector<int> MatrixCursor::getNext()
 {
-    logger.log("MatrixCursor::geNext");
+    logger.log("MatrixCursor::getNext");
     vector<int> result = this->matrixPage.getRow(this->pagePointer);
     this->pagePointer++;
     if(result.empty()){

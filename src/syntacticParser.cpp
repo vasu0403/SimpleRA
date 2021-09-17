@@ -11,36 +11,36 @@ bool syntacticParse()
         return false;
     }
 
-    if (possibleQueryType == "CLEAR")
+    if (possibleQueryType == "CLEAR") {
         return syntacticParseCLEAR();
-    else if (possibleQueryType == "INDEX")
+    } else if (possibleQueryType == "INDEX") {
         return syntacticParseINDEX();
-    else if (possibleQueryType == "LIST")
+    } else if (possibleQueryType == "LIST") {
         return syntacticParseLIST();
-    else if (possibleQueryType == "LOAD") {
+    } else if (possibleQueryType == "LOAD") {
         if (tokenizedQuery[1] == "MATRIX") {
             return syntacticParseLoadMATRIX();
         }
         return syntacticParseLOAD();
-    }
-    else if (possibleQueryType == "PRINT") {
+    } else if (possibleQueryType == "PRINT") {
         if (tokenizedQuery[1] == "MATRIX") {
             return syntacticParsePrintMATRIX();
         }
         return syntacticParsePRINT();
-    }
-    else if (possibleQueryType == "RENAME")
+    } else if (possibleQueryType == "RENAME") {
         return syntacticParseRENAME();
-    else if(possibleQueryType == "EXPORT")
+    } else if(possibleQueryType == "EXPORT") {
+        if(tokenizedQuery[1] == "MATRIX") {
+            return syntacticParseExportMATRIX();
+        }
         return syntacticParseEXPORT();
-    else if(possibleQueryType == "SOURCE")
+    } else if(possibleQueryType == "SOURCE") {
         return syntacticParseSOURCE();
-    else if(possibleQueryType == "TRANSPOSE") {
+    } else if(possibleQueryType == "TRANSPOSE") {
         if (tokenizedQuery[1] == "MATRIX") {
             return syntacticParseTransposeMATRIX();
         }
-    }
-    else
+    } else
     {
         string resultantRelationName = possibleQueryType;
         if (tokenizedQuery[1] != "<-" || tokenizedQuery.size() < 3)

@@ -7,6 +7,7 @@ bool semanticParse(){
         case CROSS: return semanticParseCROSS();
         case DISTINCT: return semanticParseDISTINCT();
         case EXPORT: return semanticParseEXPORT();
+        case EXPORT_MATRIX: return semanticParseExportMATRIX();
         case INDEX: return semanticParseINDEX();
         case JOIN: return semanticParseJOIN();
         case LIST: return semanticParseLIST();

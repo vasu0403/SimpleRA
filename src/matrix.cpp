@@ -57,7 +57,7 @@ void Matrix::inPlaceTranspose(vector<vector<int>>& matrix) {
 void Matrix::normalTranspose() {
     for(int blockRow = 0; blockRow < this->blockingFactor; blockRow++) {
         for(int blockCol = 0; blockCol <= blockRow; blockCol++) {
-            if(blockCol == blockCol) {
+            if(blockCol == blockRow) {
                 int pageIndex = blockRow * this->blockingFactor + blockCol;
                 MatrixCursor matrixCursor(this->matrixName, pageIndex);
                 vector<vector<int>> submatrix(this->sizePerBlock);
@@ -80,7 +80,8 @@ void Matrix::normalTranspose() {
                     row = matrixCursor2.getNext();
                     submatrix2[rowInd] = row;
                 }
-                this->inPlaceTranspose(submatrix1), this->inPlaceTranspose(submatrix2);
+                this->inPlaceTranspose(submatrix1);
+                this->inPlaceTranspose(submatrix2);
                 matrixBufferManager.writePage(this->matrixName, pageIndex1, submatrix2, this->sizePerBlock);
                 matrixBufferManager.writePage(this->matrixName, pageIndex2, submatrix1, this->sizePerBlock);
             }
@@ -244,6 +245,39 @@ void Matrix::getNextPage(MatrixCursor *matrixCursor) {
     if (matrixCursor->pageIndex < (this->blockingFactor * this->blockingFactor) - 1) {
         matrixCursor->nextPage(matrixCursor->pageIndex+1);
     }
+}
+
+void Matrix::makePermanent()
+{
+    logger.log("Matrix::makePermanent");
+    matrixBufferManager.deleteFile(this->sourceFileName);
+    string newSourceFile = "../data/" + this->matrixName + ".csv";
+    ofstream fout(newSourceFile, ios::out);
+    
+    MatrixCursor matrixCursor(this->matrixName, 0);
+
+    vector<int> row(this->sizePerBlock, -1);
+    vector<vector<int>> defaultBlock(this->sizePerBlock, row);
+    vector<vector<int>> blocks[this->blockingFactor];
+    for(int block = 0; block < this->blockingFactor; block++) {
+        blocks[block] = defaultBlock;
+    }
+
+    for(int blockRowIndex = 0; blockRowIndex < this->blockingFactor; blockRowIndex++) {
+        for(int blockColIndex = 0; blockColIndex < this->blockingFactor; blockColIndex++) {
+            for(int rowInd = 0; rowInd < this->sizePerBlock; rowInd++) {
+                blocks[blockColIndex][rowInd] = matrixCursor.getNext();
+            }
+        }
+        for(int rowInd = 0; rowInd < this->sizePerBlock; rowInd++) {
+            for(int blockColIndex = 0; blockColIndex < this->blockingFactor; blockColIndex++) {
+                bool first = (blockColIndex == 0);
+                bool end = (blockColIndex == this->blockingFactor - 1);
+                this->exportRow(blocks[blockColIndex][rowInd], first, end, fout);
+            }
+        }
+    }
+    fout.close();
 }
 
 
