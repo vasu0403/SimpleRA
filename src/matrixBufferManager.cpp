@@ -57,7 +57,7 @@ MatrixPage MatrixBufferManager::getFromPool(string pageName)
             return page;
 }
 
-/**
+/** 
  * @brief Inserts page indicated by tableName and pageIndex into pool. If the
  * pool is full, the pool ejects the oldest inserted page from the pool and adds
  * the current page at the end. It naturally follows a queue data structure. 
@@ -74,6 +74,17 @@ MatrixPage MatrixBufferManager::insertIntoPool(string matrixName, int pageIndex)
         pages.pop_front();
     pages.push_back(matrixPage);
     return matrixPage;
+}
+
+void MatrixBufferManager::clearPool(string matrixName) {
+    logger.log("MatrixBUfferManager::clearPool");
+    deque<MatrixPage> tempPages;
+    for(auto page: this->pages) {
+        if(page.matrixName != matrixName) {
+            tempPages.push_back(page);
+        }
+    }
+    this->pages = tempPages;
 }
 
 /**

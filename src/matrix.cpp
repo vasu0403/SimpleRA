@@ -86,6 +86,7 @@ void Matrix::normalTranspose() {
             }
         }
     }
+    matrixBufferManager.clearPool(this->matrixName);
 }
 /**
  * @brief This function splits the original matrix into smaller square matrices and stores them in multiple pages 

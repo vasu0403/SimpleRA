@@ -12,12 +12,12 @@
 
 class MatrixPage{
 
-    string matrixName;
     string pageIndex;
     int sizePerBlock;
     vector<vector<int>> rows;
 
     public:
+    string matrixName;
 
     string pageName = "";
     MatrixPage();
