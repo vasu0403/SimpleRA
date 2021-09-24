@@ -16,7 +16,7 @@ class MatrixBufferManager{
     void writePage(string pageName, vector<vector<int>> rows);
     void deleteFile(string matrixName, int pageIndex);
     void deleteFile(string fileName);
-    void writePage(string matrixName, int pageIndex, vector<vector<int>> rows, int rowCount);
+    void writePage(string matrixName, int pageIndex, vector<vector<int>> rows, int rowCount, bool append);
     void clearPool(string matrixName);
 };
 

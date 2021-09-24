@@ -10,6 +10,14 @@ public:
     uint sizePerBlock = 43;
     uint blockingFactor = 0;
     bool isSparse = false;
+
+    uint columnCount = 0;
+    vector<uint> rowsPerBlockCount;
+
+    // for sparse matrix
+    uint maxRowsPerBlockSparse = 664;
+    uint blockCount = 0;
+    uint numRowsInLastBlock = 0;
     
 
     Matrix();
@@ -19,13 +27,16 @@ public:
     bool load();
     bool normalBlockify();
     void normalPrint();
+    bool normalStupidBlockify();
     void print();
     void unload();
     void getNextPage(MatrixCursor *matrixCursor);
     void transpose();
     void normalTranspose();
+    void sparseTranspose();
     void inPlaceTranspose(vector<vector<int>>& matrix);
     void makePermanent();
+    void stupidMakePermanent();
 
 
 /**

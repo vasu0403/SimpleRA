@@ -8,7 +8,8 @@ MatrixPage::MatrixPage() {
     this->pageName = "";
     this->matrixName = "";
     this->pageIndex = -1;
-    this->sizePerBlock = 0;
+    this->countCols = 0;
+    this->countRows = 0;
     this->rows.clear();
 }
 
@@ -31,15 +32,16 @@ MatrixPage::MatrixPage(string matrixName, int pageIndex)
     this->pageIndex = pageIndex;
     this->pageName = "../data/temp/" + this->matrixName + "_Page" + to_string(pageIndex);
     Matrix matrix = *matrixCatalogue.getMatrix(matrixName);
-    this->sizePerBlock = matrix.sizePerBlock;
-    vector<int> row(this->sizePerBlock, 0);
-    this->rows.assign(this->sizePerBlock, row);
-
+    this->countRows = matrix.rowsPerBlockCount[pageIndex];
+    this->countCols = matrix.columnCount;
+    vector<int> row(this->countCols, 0);
+    this->rows.assign(this->countRows, row);
+ 
     ifstream fin(pageName, ios::in);
     int number;
-    for (uint rowCounter = 0; rowCounter < this->sizePerBlock; rowCounter++)
+    for (uint rowCounter = 0; rowCounter < this->countRows; rowCounter++)
     {
-        for (int columnCounter = 0; columnCounter < this->sizePerBlock; columnCounter++)
+        for (int columnCounter = 0; columnCounter < this->countCols; columnCounter++)
         {
             fin >> number;
             this->rows[rowCounter][columnCounter] = number;
@@ -59,18 +61,19 @@ vector<int> MatrixPage::getRow(int rowIndex)
     logger.log("MatrixPage::getRow");
     vector<int> result;
     result.clear();
-    if (rowIndex >= this->sizePerBlock)
+    if (rowIndex >= this->countRows)
         return result;
     return this->rows[rowIndex];
 }
 
-MatrixPage::MatrixPage(string matrixName, int pageIndex, vector<vector<int>> rows, int size)
+MatrixPage::MatrixPage(string matrixName, int pageIndex, vector<vector<int>> rows, int countRows)
 {
     logger.log("MatrixPage::MatrixPage");
     this->matrixName = matrixName;
     this->pageIndex = pageIndex;
     this->rows = rows;
-    this->sizePerBlock = size;
+    this->countRows = countRows;
+    this->countCols = rows[0].size();
     this->pageName = "../data/temp/"+this->matrixName + "_Page" + to_string(pageIndex);
 }
 
@@ -78,13 +81,18 @@ MatrixPage::MatrixPage(string matrixName, int pageIndex, vector<vector<int>> row
  * @brief writes current page contents to file.
  * 
  */
-void MatrixPage::writePage()
+void MatrixPage::writePage(bool append)
 {
     logger.log("MatrixPage::writePage");
-    ofstream fout(this->pageName, ios::trunc);
-    for (int rowCounter = 0; rowCounter < this->sizePerBlock; rowCounter++)
+    ofstream fout;
+    if(append) {
+        fout.open(this->pageName, ios::app);
+    } else {
+        fout.open(this->pageName, ios::trunc);
+    }
+    for (int rowCounter = 0; rowCounter < this->countRows; rowCounter++)
     {
-        for (int columnCounter = 0; columnCounter < this->sizePerBlock; columnCounter++)
+        for (int columnCounter = 0; columnCounter < this->rows[rowCounter].size(); columnCounter++)
         {
             if (columnCounter != 0)
                 fout << " ";

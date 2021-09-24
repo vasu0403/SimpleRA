@@ -13,8 +13,9 @@
 class MatrixPage{
 
     string pageIndex;
-    int sizePerBlock;
     vector<vector<int>> rows;
+    int countRows = 0;
+    int countCols = 0;
 
     public:
     string matrixName;
@@ -24,5 +25,5 @@ class MatrixPage{
     MatrixPage(string matrixName, int pageIndex);
     MatrixPage(string matrixName, int pageIndex, vector<vector<int>> rows, int size);
     vector<int> getRow(int rowIndex);
-    void writePage();
+    void writePage(bool append);
 };

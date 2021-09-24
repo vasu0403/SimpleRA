@@ -96,11 +96,11 @@ void MatrixBufferManager::clearPool(string matrixName) {
  * @param rows 
  * @param rowCount 
  */
-void MatrixBufferManager::writePage(string matrixName, int pageIndex, vector<vector<int>> rows, int rowCount)
+void MatrixBufferManager::writePage(string matrixName, int pageIndex, vector<vector<int>> rows, int rowCount, bool append)
 {
     logger.log("MatrixBufferManager::writePage");
     MatrixPage matrixPage(matrixName, pageIndex, rows, rowCount);
-    matrixPage.writePage();
+    matrixPage.writePage(append);
 }
 
 /**

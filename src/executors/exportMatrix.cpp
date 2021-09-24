@@ -32,6 +32,6 @@ void executeExportMATRIX()
 {
     logger.log("executeExportMATRIX");
     Matrix* matrix = matrixCatalogue.getMatrix(parsedQuery.exportMatrixName);
-    matrix->makePermanent();
+    matrix->stupidMakePermanent();
     return;
 }

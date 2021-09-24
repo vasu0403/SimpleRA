@@ -30,6 +30,15 @@ vector<int> MatrixCursor::getNext()
     }
     return result;
 }
+
+vector<int> MatrixCursor::getLine(int lineNumber)
+{
+    logger.log("MatrixCursor::getLine");
+    vector<int> result = this->matrixPage.getRow(lineNumber);
+    this->pagePointer = lineNumber + 1;
+    return result;
+}
+
 /**
  * @brief Function that loads Page indicated by pageIndex. Now the cursor starts
  * reading from the new page.

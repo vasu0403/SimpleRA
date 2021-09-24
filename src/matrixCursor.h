@@ -19,6 +19,7 @@ class MatrixCursor{
     MatrixCursor(string matrixName, int pageIndex);
     vector<int> getNext();
     void nextPage(int pageIndex);
+    vector<int> getLine(int lineNumber);
 };
 
 #endif
