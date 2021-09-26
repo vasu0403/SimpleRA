@@ -326,6 +326,16 @@ bool Matrix::findMatrixProperties() {
     }
 }
 
+
+void Matrix::print() {
+    logger.log("Matrix::print");
+    if(this->isSparse) {
+        this->sparsePrint();
+    } else {
+        this->normalPrint();
+    }
+}
+
 void Matrix::normalPrint() {
     logger.log("Matrix::normalPrint");
     uint count = min((uint)20, this->size);
@@ -339,12 +349,36 @@ void Matrix::normalPrint() {
     printRowCount(this->size);
 }
 
-void Matrix::print() {
-    logger.log("Matrix::print");
-    if(this->isSparse) {
-        ;
-    } else {
-        this->normalPrint();
+void Matrix::sparsePrint() {
+    logger.log("Matrix::sparsePrint");
+    matrixBufferManager.clearPool(this->matrixName);
+
+    MatrixCursor matrixCursor(this->matrixName, 0);
+    int stored = ((this->blockCount - 1)* this->maxRowsPerBlockSparse);
+    if(this->blockCount) {
+        stored += this->rowsPerBlockCount[this->blockCount - 1];
+    }
+    vector<int> row = {-1, -1, -1};
+    int counter = 0;
+    if(stored) {
+        row = matrixCursor.getNext();
+    }
+    for(int i = 0; i < min(this->size, (uint)20); i++) {
+        for(int j = 0; j < this->size; j++) {
+            int value = 0;
+            if(row.size() == 3 && i == row[0] && j == row[1]) {
+                value = row[2];
+                counter++;
+                if(counter < stored) {
+                    row = matrixCursor.getNext();
+                }
+            }
+            if(j != 0) {
+                cout << ", ";
+            }
+            cout << value;
+        }
+        cout << endl;
     }
 }
 

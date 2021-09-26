@@ -29,8 +29,10 @@ public:
     bool normalStupidBlockify();
     bool compressedBlockify();
     
-    void normalPrint();
     void print();
+    void normalPrint();
+    void sparsePrint();
+    
     void unload();
     void getNextPage(MatrixCursor *matrixCursor);
 
