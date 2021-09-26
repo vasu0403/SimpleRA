@@ -1,6 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-make: *** No rule to make target 'matrixCursor.o', needed by 'server'.  Stop.
- 
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -8,7 +6,7 @@ make: *** No rule to make target 'matrixCursor.o', needed by 'server'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Fri Sep 17 19:34:51 2021
+# Make data base, printed on Sun Sep 26 15:09:00 2021
 
 # Variables
 
@@ -23,7 +21,7 @@ WSLENV = ELECTRON_RUN_AS_NODE/w:
 # environment
 VSCODE_AGENT_FOLDER = /home/vasu0403/.vscode-server
 # makefile (from 'Makefile', line 7)
-SRC := server.cpp page.cpp bufferManager.cpp matrix.cpp executor.cpp tableCatalogue.cpp cursor.cpp clear.cpp matrixCatalogue.cpp logger.cpp matrixCursor.cpp semanticParser.cpp table.cpp syntacticParser.cpp
+SRC := server.cpp page.cpp bufferManager.cpp matrix.cpp matrixPage.cpp executor.cpp tableCatalogue.cpp cursor.cpp clear.cpp matrixCatalogue.cpp logger.cpp matrixCursor.cpp semanticParser.cpp table.cpp matrixBufferManager.cpp syntacticParser.cpp
 # environment
 VSCODE_LOG_NATIVE = false
 # automatic
@@ -55,15 +53,15 @@ VSCODE_CWD = /mnt/c/Users/Vasu/AppData/Local/Programs/Microsoft VS Code
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
-PATH = /home/vasu0403/.vscode-server/bin/83bd43bc519d15e50c4272c6cf5c1479df196a4d/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files/WindowsApps/CanonicalGroupLimited.Ubuntu20.04onWindows_2004.2021.825.0_x64__79rhkp1fndgsc:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/iCLS/:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/iCLS/:/mnt/c/windows/system32:/mnt/c/windows:/mnt/c/windows/System32/Wbem:/mnt/c/windows/System32/WindowsPowerShell/v1.0/:/mnt/c/windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files (x86)/Brackets/command:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files/Git/cmd:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Users/Vasu/AppData/Local/Programs/Python/Python38-32/Scripts/:/mnt/c/Users/Vasu/AppData/Local/Programs/Python/Python38-32/:/mnt/c/Users/Vasu/AppData/Local/Programs/Python/Python37/Scripts/:/mnt/c/Users/Vasu/AppData/Local/Programs/Python/Python37/:/mnt/c/Users/Vasu/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Vasu/AppData/Local/atom/bin:/mnt/c/Users/Vasu/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Vasu/AppData/Local/Programs/Microsoft VS Code/bin
+PATH = /home/vasu0403/.vscode-server/bin/7f6ab5485bbc008386c4386d08766667e155244e/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/mnt/c/Program Files/WindowsApps/CanonicalGroupLimited.Ubuntu20.04onWindows_2004.2021.825.0_x64__79rhkp1fndgsc:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/iCLS/:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/iCLS/:/mnt/c/windows/system32:/mnt/c/windows:/mnt/c/windows/System32/Wbem:/mnt/c/windows/System32/WindowsPowerShell/v1.0/:/mnt/c/windows/System32/OpenSSH/:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files (x86)/Brackets/command:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files/Git/cmd:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Users/Vasu/AppData/Local/Programs/Python/Python38-32/Scripts/:/mnt/c/Users/Vasu/AppData/Local/Programs/Python/Python38-32/:/mnt/c/Users/Vasu/AppData/Local/Programs/Python/Python37/Scripts/:/mnt/c/Users/Vasu/AppData/Local/Programs/Python/Python37/:/mnt/c/Users/Vasu/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Vasu/AppData/Local/atom/bin:/mnt/c/Users/Vasu/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Vasu/AppData/Local/Programs/Microsoft VS Code/bin
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # makefile (from 'Makefile', line 11)
-EXEC_SRC := ./executors/projection.cpp ./executors/selection.cpp ./executors/source.cpp ./executors/print.cpp ./executors/cross.cpp ./executors/printMatrix.cpp ./executors/index.cpp ./executors/join.cpp ./executors/list.cpp ./executors/load.cpp ./executors/loadMatrix.cpp ./executors/sort.cpp ./executors/rename.cpp ./executors/export.cpp ./executors/distinct.cpp
+EXEC_SRC := ./executors/projection.cpp ./executors/selection.cpp ./executors/source.cpp ./executors/print.cpp ./executors/cross.cpp ./executors/printMatrix.cpp ./executors/index.cpp ./executors/join.cpp ./executors/list.cpp ./executors/load.cpp ./executors/transposeMatrix.cpp ./executors/loadMatrix.cpp ./executors/sort.cpp ./executors/rename.cpp ./executors/export.cpp ./executors/distinct.cpp ./executors/exportMatrix.cpp
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-5048f697-4c3c-4333-b0a4-b2b4509ec1b2.sock
+VSCODE_IPC_HOOK_CLI = /tmp/vscode-ipc-f4ad53c7-60bb-4bba-87fa-67f89dbd6ca0.sock
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -155,7 +153,7 @@ SUFFIXES :=
 # default
 .INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
 # environment
-VSCODE_INJECT_NODE_MODULE_LOOKUP_PATH = /home/vasu0403/.vscode-server/bin/83bd43bc519d15e50c4272c6cf5c1479df196a4d/remote/node_modules
+VSCODE_INJECT_NODE_MODULE_LOOKUP_PATH = /home/vasu0403/.vscode-server/bin/7f6ab5485bbc008386c4386d08766667e155244e/remote/node_modules
 # default
 .RECIPEPREFIX := 
 # environment
@@ -175,10 +173,10 @@ WSL_DISTRO_NAME = Ubuntu-20.04
 
 # Directories
 
-# . (device 2064, inode 57187): 49 files, no impossibilities.
-# ./executors (device 2064, inode 57199): 32 files, no impossibilities.
+# . (device 2064, inode 57230): 56 files, no impossibilities.
+# ./executors (device 2064, inode 57256): 36 files, no impossibilities.
 
-# 81 files, no impossibilities in 2 directories.
+# 92 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -193,20 +191,21 @@ executors/%.o: executors/.cpp global.h
 # Not a target:
 clear.o:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-17 18:42:09.4182831
+#  Last modified 2021-09-24 18:00:12.1313006
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 table.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:07.7713006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 matrixCatalogue.o:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-17 18:42:02.3482831
+#  Last modified 2021-09-24 18:00:03.6413006
 #  File has been updated.
 #  Successfully updated.
 
@@ -214,110 +213,148 @@ all: server
 #  Command line target.
 #  Implicit rule search has been done.
 #  File does not exist.
-#  File has not been updated.
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+matrixPage.o:
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 17:59:56.1913006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 syntacticParser.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:10.6113006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 executors/export.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:37.2513006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 executors/loadMatrix.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:31.7713006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 executor.o:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-17 18:41:56.5482831
+#  Last modified 2021-09-24 17:59:57.4713006
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 executors/projection.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:35.9813006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-05 21:02:32.875609
+#  Last modified 2021-09-24 11:12:31.2913006
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 server.o:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-17 18:41:50.7482831
+#  Last modified 2021-09-24 17:59:49.7113006
+ 
 #  File has been updated.
 #  Successfully updated.
 
-server: server.o page.o bufferManager.o matrix.o executor.o tableCatalogue.o cursor.o clear.o matrixCatalogue.o logger.o matrixCursor.o semanticParser.o table.o syntacticParser.o executors/projection.o executors/selection.o executors/source.o executors/print.o executors/cross.o executors/printMatrix.o executors/index.o executors/join.o executors/list.o executors/load.o executors/loadMatrix.o executors/sort.o executors/rename.o executors/export.o executors/distinct.o
+server: server.o page.o bufferManager.o matrix.o matrixPage.o executor.o tableCatalogue.o cursor.o clear.o matrixCatalogue.o logger.o matrixCursor.o semanticParser.o table.o matrixBufferManager.o syntacticParser.o executors/projection.o executors/selection.o executors/source.o executors/print.o executors/cross.o executors/printMatrix.o executors/index.o executors/join.o executors/list.o executors/load.o executors/transposeMatrix.o executors/loadMatrix.o executors/sort.o executors/rename.o executors/export.o executors/distinct.o executors/exportMatrix.o
 #  Implicit rule search has not been done.
-#  Last modified 2021-09-17 18:42:31.0582831
-#  File has not been updated.
+#  Last modified 2021-09-26 15:08:42.8871485
+#  File has been updated.
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 20):
 	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(EXEC_OBJS)
 
 # Not a target:
 executors/print.o:
- 
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:21.3513006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 matrixCursor.o:
 #  Implicit rule search has been done.
-#  File does not exist.
-#  File has not been updated.
+#  Last modified 2021-09-24 18:00:02.3613006
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+executors/transposeMatrix.o:
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:30.5413006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 executors/source.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:19.8513006
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+matrixBufferManager.o:
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:09.2713006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 logger.o:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-17 18:42:03.5782831
+#  Last modified 2021-09-24 18:00:04.8313006
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 tableCatalogue.o:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-17 18:41:57.9182831
+#  Last modified 2021-09-24 17:59:59.7813006
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 executors/rename.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:13.9113006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 matrix.o:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-17 18:41:55.2982831
+#  Last modified 2021-09-26 15:08:42.0571485
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 bufferManager.o:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-17 18:41:53.7682831
+#  Last modified 2021-09-24 17:59:52.7213006
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+executors/exportMatrix.o:
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:38.6713006
 #  File has been updated.
 #  Successfully updated.
 
@@ -329,20 +366,22 @@ bufferManager.o:
 
 # Not a target:
 executors/join.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:26.7713006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 executors/cross.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:23.1613006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 page.o:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-17 18:41:52.4182831
+#  Last modified 2021-09-24 17:59:51.1513006
 #  File has been updated.
 #  Successfully updated.
 
@@ -358,73 +397,81 @@ clean:
 
 # Not a target:
 executors/printMatrix.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:24.3613006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 executors/sort.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:34.2713006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 executors/index.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:32.9813006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 executors/list.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:27.9713006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 executors/selection.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:18.2213006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 executors/load.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:29.3313006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 executors/distinct.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:25.5513006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 semanticParser.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2021-09-24 18:00:06.0113006
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 cursor.o:
 #  Implicit rule search has been done.
-#  Last modified 2021-09-17 18:42:01.0582831
+#  Last modified 2021-09-24 18:00:01.1813006
 #  File has been updated.
 #  Successfully updated.
 
 # files hash-table stats:
-# Load=35/1024=3%, Rehash=0, Collisions=0/77=0%
+# Load=39/1024=4%, Rehash=0, Collisions=0/85=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 106 / storage = 1304 B / avg = 12 B
-# current buf: size = 8162 B / used = 1304 B / count = 106 / avg = 12 B
+# strcache buffers: 1 (0) / strings = 118 / storage = 1536 B / avg = 13 B
+# current buf: size = 8162 B / used = 1536 B / count = 118 / avg = 13 B
 
-# strcache performance: lookups = 133 / hit rate = 20%
+# strcache performance: lookups = 148 / hit rate = 20%
 # hash-table stats:
-# Load=106/8192=1%, Rehash=0, Collisions=3/133=2%
-# Finished Make data base on Fri Sep 17 19:34:51 2021
+# Load=118/8192=1%, Rehash=0, Collisions=3/148=2%
+# Finished Make data base on Sun Sep 26 15:09:00 2021
 
  

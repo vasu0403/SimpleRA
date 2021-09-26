@@ -55,6 +55,7 @@ void Matrix::inPlaceTranspose(vector<vector<int>>& matrix) {
 }
 
 void Matrix::normalTranspose() {
+    logger.log("Matrix::normalTranspose");
     for(int blockRow = 0; blockRow < this->blockingFactor; blockRow++) {
         for(int blockCol = 0; blockCol <= blockRow; blockCol++) {
             if(blockCol == blockRow) {
@@ -91,6 +92,7 @@ void Matrix::normalTranspose() {
 }
 
 void Matrix::sparseTranspose() {
+    logger.log("Matrix::sparseTranspose");
     MatrixCursor matrixCursor(this->matrixName, 0);
     for(int block = 0; block < this->blockCount; block++) {
         int numRows = this->rowsPerBlockCount[block];
@@ -104,14 +106,18 @@ void Matrix::sparseTranspose() {
     }
     matrixBufferManager.clearPool(this->matrixName);
     for(int i = 0; i < this->blockCount; i++) {
+        int rowCount1 = this->rowsPerBlockCount[i];
+        MatrixCursor matrixCursor1(this->matrixName, i);
+        vector<vector<int>> block1(rowCount1);
+        for(int rowInd = 0; rowInd < rowCount1; rowInd++) {
+            block1[rowInd] = matrixCursor1.getNext();
+        }
         for(int j = i + 1; j < this->blockCount; j++) {
-            int rowCount1 = this->rowsPerBlockCount[i];
             int rowCount2 = this->rowsPerBlockCount[j];
-            vector<vector<int>> block1(rowCount1), block2(rowCount2), bothBlocks(rowCount1 + rowCount2);
-            MatrixCursor matrixCursor1(this->matrixName, i);
+            vector<vector<int>> block2(rowCount2), bothBlocks(rowCount1 + rowCount2);
             MatrixCursor matrixCursor2(this->matrixName, j);
             for(int rowInd = 0; rowInd < rowCount1; rowInd++) {
-                bothBlocks[rowInd] = matrixCursor1.getNext();
+                bothBlocks[rowInd] = block1[rowInd];
             }
             for(int rowInd = 0; rowInd < rowCount2; rowInd++) {
                 bothBlocks[rowCount1 + rowInd] = matrixCursor2.getNext();
@@ -123,10 +129,10 @@ void Matrix::sparseTranspose() {
             for(int rowInd = 0; rowInd < rowCount2; rowInd++) {
                 block2[rowInd] = bothBlocks[rowCount1 + rowInd];
             }
-            matrixBufferManager.writePage(this->matrixName, i, block1, rowCount1, false);   
-            matrixBufferManager.writePage(this->matrixName, j, block2, rowCount2, false);  
+            matrixBufferManager.writePage(this->matrixName, j, block2, rowCount2, false);
             matrixBufferManager.clearPool(this->matrixName);
         }
+        matrixBufferManager.writePage(this->matrixName, i, block1, rowCount1, false);   
     }
     if(this->blockCount == 1) {
         int rowCount = this->rowsPerBlockCount[0];
@@ -240,6 +246,7 @@ bool Matrix::normalStupidBlockify() {
 }
 
 bool Matrix::normalBlockify() {
+    logger.log("Matrix::normalBlockify");
     ifstream fin(this->sourceFileName, ios::in);
     this->blockingFactor = ceil((float)this->size / this->sizePerBlock);
     vector<int> row(this->sizePerBlock, -1);
@@ -353,15 +360,24 @@ void Matrix::unload() {
  * @return vector<int> 
  */
 void Matrix::getNextPage(MatrixCursor *matrixCursor) {
-    logger.log("Matrix::getNext");
+    logger.log("Matrix::getNextPage");
     if (matrixCursor->pageIndex < (this->blockingFactor * this->blockingFactor) - 1) {
         matrixCursor->nextPage(matrixCursor->pageIndex+1);
     }
 }
 
-void Matrix::makePermanent()
-{
+
+void Matrix::makePermanent() {
     logger.log("Matrix::makePermanent");
+    if(this->isSparse) {
+        this->makePermanentSparse();
+    } else {
+        this->makePermanentNormalStupid();
+    }
+}
+void Matrix::makePermanentNormal()
+{
+    logger.log("Matrix::makePermanentNormal");
     matrixBufferManager.deleteFile(this->sourceFileName);
     string newSourceFile = "../data/" + this->matrixName + ".csv";
     ofstream fout(newSourceFile, ios::out);
@@ -391,8 +407,8 @@ void Matrix::makePermanent()
     }
     fout.close();
 }
-void Matrix::stupidMakePermanent() {
-    logger.log("Matrix::stupidMakePermanent");
+void Matrix::makePermanentNormalStupid() {
+    logger.log("Matrix::makePermanentNormalStupid");
     matrixBufferManager.deleteFile(this->sourceFileName);
     string newSourceFile = "../data/" + this->matrixName + ".csv";
     ofstream fout(newSourceFile, ios::out);
@@ -411,5 +427,42 @@ void Matrix::stupidMakePermanent() {
                 this->exportRow(row, first, end, fout);
             }
         }
+    }
+}
+
+void Matrix::makePermanentSparse() {
+    logger.log("Matrix::makePermanentSparse");
+    matrixBufferManager.deleteFile(this->sourceFileName);
+    string newSourceFile = "../data/" + this->matrixName + ".csv";
+    ofstream fout(newSourceFile, ios::out);
+    matrixBufferManager.clearPool(this->matrixName);
+
+
+    MatrixCursor matrixCursor(this->matrixName, 0);
+    int stored = ((this->blockCount - 1)* this->maxRowsPerBlockSparse);
+    if(this->blockCount) {
+        stored += this->rowsPerBlockCount[this->blockCount - 1];
+    }
+    vector<int> row = {-1, -1, -1};
+    int counter = 0;
+    if(stored) {
+        row = matrixCursor.getNext();
+    }
+    for(int i = 0; i < this->size; i++) {
+        for(int j = 0; j < this->size; j++) {
+            int value = 0;
+            if(row.size() == 3 && i == row[0] && j == row[1]) {
+                value = row[2];
+                counter++;
+                if(counter < stored) {
+                    row = matrixCursor.getNext();
+                }
+            }
+            if(j != 0) {
+                fout << ", ";
+            }
+            fout << value;
+        }
+        fout << endl;
     }
 }

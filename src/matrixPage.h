@@ -12,7 +12,7 @@
 
 class MatrixPage{
 
-    string pageIndex;
+    int pageIndex;
     vector<vector<int>> rows;
     int countRows = 0;
     int countCols = 0;

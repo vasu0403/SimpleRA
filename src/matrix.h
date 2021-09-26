@@ -23,20 +23,26 @@ public:
     Matrix();
     Matrix(string matrixName);
     bool blockify();
-    bool compressedBlockify();
+
     bool load();
     bool normalBlockify();
-    void normalPrint();
     bool normalStupidBlockify();
+    bool compressedBlockify();
+    
+    void normalPrint();
     void print();
     void unload();
     void getNextPage(MatrixCursor *matrixCursor);
+
     void transpose();
     void normalTranspose();
     void sparseTranspose();
     void inPlaceTranspose(vector<vector<int>>& matrix);
+    
     void makePermanent();
-    void stupidMakePermanent();
+    void makePermanentNormal();
+    void makePermanentNormalStupid();
+    void makePermanentSparse();
 
 
 /**
