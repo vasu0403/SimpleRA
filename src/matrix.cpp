@@ -178,8 +178,15 @@ bool Matrix::compressedBlockify() {
     for(int row = 0; row < size; row++) {
         int flushed = 0;
         for(int col = 0; col < size; col++) {
-            fin >> word;
-            word.erase(remove(word.begin(), word.end(), ','), word.end());
+            if(col != size - 1) {
+                if(getline(fin, word, ',')) {
+                    word.erase(remove_if(word.begin(), word.end(), ::isspace), word.end());
+                }
+            } else {
+                if(getline(fin, word, '\n')) {
+                    word.erase(remove_if(word.begin(), word.end(), ::isspace), word.end());
+                }
+            }
             if(stoi(word) == 0) continue;
             block[counter++] = {row, col, stoi(word)};
             if(counter == this->maxRowsPerBlockSparse) {
@@ -214,8 +221,15 @@ bool Matrix::normalStupidBlockify() {
         row = defaultRow;
         for(int j = 0; j < extendedSize; j++) {
             if(i < this->size && j < this->size) {
-                fin >> word;
-                word.erase(remove(word.begin(), word.end(), ','), word.end());
+                if(j != this->size - 1) {
+                    if(getline(fin, word, ',')) {
+                        word.erase(remove_if(word.begin(), word.end(), ::isspace), word.end());
+                    }
+                } else {
+                    if(getline(fin, word, '\n')) {
+                        word.erase(remove_if(word.begin(), word.end(), ::isspace), word.end());
+                    }
+                }
                 row[counter] = stoi(word);
             }
             counter++;
@@ -303,12 +317,23 @@ bool Matrix::findMatrixProperties() {
         }
         for(int row = 1; row < size; row++) {
             for(int col = 0; col < size; col++) {
-                if(fin >> word) {
-                    word.erase(remove(word.begin(), word.end(), ','), word.end());
-                    if(stoi(word) == 0) numZeros++;     // do error checking here ??
+                // if(fin >> word) {
+                //     word.erase(remove(word.begin(), word.end(), ','), word.end());
+                //     if(stoi(word) == 0) numZeros++;     // do error checking here ??
+                // } else {
+                //     cout << "SEMANTIC ERROR: Input does not follow properties of a matrix" << endl;
+                //     return false;
+                // }
+                if(col != size - 1) {
+                    if(getline(fin, word, ',')) {
+                        word.erase(remove_if(word.begin(), word.end(), ::isspace), word.end());
+                        if(stoi(word) == 0) numZeros++;
+                    }
                 } else {
-                    cout << "SEMANTIC ERROR: Input does not follow properties of a matrix" << endl;
-                    return false;
+                    if(getline(fin, word, '\n')) {
+                        word.erase(remove_if(word.begin(), word.end(), ::isspace), word.end());
+                        if(stoi(word) == 0) numZeros++;
+                    }
                 }
             }
         }
@@ -374,7 +399,7 @@ void Matrix::sparsePrint() {
                 }
             }
             if(j != 0) {
-                cout << ", ";
+                cout << ",";
             }
             cout << value;
         }
@@ -493,7 +518,7 @@ void Matrix::makePermanentSparse() {
                 }
             }
             if(j != 0) {
-                fout << ", ";
+                fout << ",";
             }
             fout << value;
         }

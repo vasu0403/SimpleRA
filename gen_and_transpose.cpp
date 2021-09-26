@@ -37,7 +37,7 @@ int main(int argv, char* argc[] )
         for(int j = 0; j < N; j++) {
             f1 << matrix[i][j];
             if(j != N - 1) {
-                f1 << ", ";
+                f1 << ",";
             } else {
                 f1 << "\n";
             }
@@ -47,7 +47,7 @@ int main(int argv, char* argc[] )
         for(int j = 0; j < N; j++) {
             f2 << transpose[i][j];
             if(j != N - 1) {
-                f2 << ", ";
+                f2 << ",";
             } else {
                 f2 << "\n";
             }

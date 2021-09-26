@@ -32,7 +32,7 @@ public:
     void print();
     void normalPrint();
     void sparsePrint();
-    
+
     void unload();
     void getNextPage(MatrixCursor *matrixCursor);
 
@@ -64,7 +64,7 @@ void writeRow(vector<T> row, ostream &fout)
             break;
         }
         if (columnCounter != 0)
-            fout << ", ";
+            fout << ",";
         fout << row[columnCounter];
     }
     fout << endl;
@@ -95,7 +95,7 @@ void exportRow(vector<T> row, bool first, bool end, ostream &fout) {
             break;
         }
         if (!first || columnCounter != 0)
-            fout << ", ";
+            fout << ",";
         fout << row[columnCounter];
     }
     if(end) { 
