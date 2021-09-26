@@ -57,7 +57,6 @@ public:
 template <typename T>
 void writeRow(vector<T> row, ostream &fout)
 {
-    logger.log("Matrix::printRow");
     for (int columnCounter = 0; columnCounter < row.size(); columnCounter++)
     {
         if(row[columnCounter] == -1) {
@@ -80,7 +79,6 @@ void writeRow(vector<T> row, ostream &fout)
 template <typename T>
 void writeRow(vector<T> row)
 {
-    logger.log("Matrix::printRow");
     ofstream fout(this->sourceFileName, ios::app);
     this->writeRow(row, fout);
     fout.close();
@@ -88,7 +86,6 @@ void writeRow(vector<T> row)
 
 template <typename T>
 void exportRow(vector<T> row, bool first, bool end, ostream &fout) {
-    logger.log("Matrix::exportRow");
     if(row[0] == -1) return;
     for (int columnCounter = 0; columnCounter < row.size(); columnCounter++) {
         if(row[columnCounter] == -1) {

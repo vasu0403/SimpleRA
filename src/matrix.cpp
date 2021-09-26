@@ -298,7 +298,6 @@ bool Matrix::normalBlockify() {
 
 bool Matrix::findMatrixProperties() {
     logger.log("Matrix::findMatrixProperties");
-    cout << this->sourceFileName << endl;
     fstream fin(this->sourceFileName, ios::in);
     string line;
     int size = 0, numZeros = 0;
